@@ -11,7 +11,7 @@ public enum AddExtraIslandsLayer implements ICastleTransformer {
 	public int apply(INoiseRandom rand, int n, int e, int s, int w, int centre) {
 		if (ExampleBiomeLayers.isDeepOcean(centre)) {
 			if (ExampleBiomeLayers.isDeepOcean(n) && ExampleBiomeLayers.isDeepOcean(e) && ExampleBiomeLayers.isDeepOcean(s) && ExampleBiomeLayers.isDeepOcean(w)) {
-				if (rand.random(8) == 0) {
+				if (rand.random(5) == 0) {
 					return ExampleBiomeLayers.getRandomBiome(rand);
 				}
 			}

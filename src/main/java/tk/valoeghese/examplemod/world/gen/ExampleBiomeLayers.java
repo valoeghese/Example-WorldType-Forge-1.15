@@ -56,13 +56,15 @@ public final class ExampleBiomeLayers {
 	public static int getRandomBiome(INoiseRandom rand) {
 		return randomBiomesArray[rand.random(randomBiomesArray.length)];
 	}
-	
+
 	static {
 		Biome[] biomes = ExampleBiomeProvider.getBiomeSet().toArray(new Biome[0]);
 		randomBiomesArray = new int[biomes.length];
-		
+
 		for (int index = 0; index < biomes.length; ++index) {
-			randomBiomesArray[index] = Registry.BIOME.getId(biomes[index]);
+			if (biomes[index].getCategory() != Biome.Category.OCEAN) {
+				randomBiomesArray[index] = Registry.BIOME.getId(biomes[index]);
+			}
 		}
 	}
 

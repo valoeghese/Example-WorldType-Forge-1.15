@@ -13,7 +13,12 @@ public class InitialLandOceanLayer implements IAreaTransformer0 {
 
 	@Override
 	public int apply(INoiseRandom rand, int genX, int genZ) {
-		return rand.random(this.landRarity) == 0 ? ExampleBiomeLayers.getRandomBiome(rand) : 0;
+		if (genX == 0 && genZ == 0) {
+			return ExampleBiomeLayers.getRandomBiome(rand);
+		}
+		else {
+			return rand.random(this.landRarity) == 0 ? ExampleBiomeLayers.getRandomBiome(rand) : 0;
+		}
 	}
 
 }
