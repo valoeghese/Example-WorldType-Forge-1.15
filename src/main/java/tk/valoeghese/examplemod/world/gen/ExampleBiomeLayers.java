@@ -17,6 +17,7 @@ import net.minecraft.world.gen.layer.ShoreLayer;
 import net.minecraft.world.gen.layer.ZoomLayer;
 import tk.valoeghese.examplemod.world.gen.layer.AddExtraIslandsLayer;
 import tk.valoeghese.examplemod.world.gen.layer.InitialLandOceanLayer;
+import tk.valoeghese.examplemod.world.gen.layer.ShallowOceansAroundLandLayer;
 
 // Vanilla registries are deprecated in forge, but we need to use them to get the raw int ids for biome layers
 @SuppressWarnings("deprecation")
@@ -34,6 +35,7 @@ public final class ExampleBiomeLayers {
 
 		factory = ZoomLayer.NORMAL.apply(randomProvider.apply(1000L), factory);
 		// Add beaches and small edges
+		factory = ShallowOceansAroundLandLayer.INSTANCE.apply(randomProvider.apply(9L), factory);
 		factory = ShoreLayer.INSTANCE.apply(randomProvider.apply(10L), factory);
 		factory = LayerUtil.repeat(1001L, ZoomLayer.NORMAL, factory, islandSizeMin - 1, randomProvider);
 
@@ -52,6 +54,10 @@ public final class ExampleBiomeLayers {
 		return biomeId == DEEP_WARM_OCEAN || biomeId == DEEP_LUKEWARM_OCEAN || biomeId == DEEP_OCEAN || biomeId == DEEP_COLD_OCEAN || biomeId == DEEP_FROZEN_OCEAN;
 	}
 
+	public static boolean isOcean(int biomeId) {
+		return biomeId == WARM_OCEAN || biomeId == LUKEWARM_OCEAN || biomeId == OCEAN || biomeId == COLD_OCEAN || biomeId == FROZEN_OCEAN || biomeId == DEEP_WARM_OCEAN || biomeId == DEEP_LUKEWARM_OCEAN || biomeId == DEEP_OCEAN || biomeId == DEEP_COLD_OCEAN || biomeId == DEEP_FROZEN_OCEAN;
+	}
+
 	public static int getRandomBiome(INoiseRandom rand) {
 		return randomBiomesArray[rand.random(randomBiomesArray.length)];
 	}
@@ -67,6 +73,11 @@ public final class ExampleBiomeLayers {
 		}
 	}
 
+	public static final int OCEAN = Registry.BIOME.getId(Biomes.OCEAN);
+	protected static final int WARM_OCEAN = Registry.BIOME.getId(Biomes.WARM_OCEAN);
+	protected static final int LUKEWARM_OCEAN = Registry.BIOME.getId(Biomes.LUKEWARM_OCEAN);
+	protected static final int COLD_OCEAN = Registry.BIOME.getId(Biomes.COLD_OCEAN);
+	protected static final int FROZEN_OCEAN = Registry.BIOME.getId(Biomes.FROZEN_OCEAN);
 	private static final int DEEP_WARM_OCEAN = Registry.BIOME.getId(Biomes.DEEP_WARM_OCEAN);
 	private static final int DEEP_LUKEWARM_OCEAN = Registry.BIOME.getId(Biomes.DEEP_LUKEWARM_OCEAN);
 	private static final int DEEP_OCEAN = Registry.BIOME.getId(Biomes.DEEP_OCEAN);
