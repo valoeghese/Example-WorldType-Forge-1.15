@@ -28,9 +28,8 @@ public final class ExampleBiomeLayers {
 		// Add deep ocean and more land with random biomes
 		for (int i = 0; i < extraIslands; ++i) {
 			factory = DeepOceanLayer.INSTANCE.apply(randomProvider.apply(2L + i), factory);
+			factory = ZoomLayer.NORMAL.apply(randomProvider.apply(100L + i), factory);
 			factory = AddExtraIslandsLayer.INSTANCE.apply(randomProvider.apply(i), factory);
-			factory = ZoomLayer.NORMAL.apply(randomProvider.apply(100L + 2 * i), factory);
-			factory = ZoomLayer.NORMAL.apply(randomProvider.apply(100L + 2 * i + 1), factory);
 		}
 
 		factory = ZoomLayer.NORMAL.apply(randomProvider.apply(1000L), factory);
